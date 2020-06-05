@@ -58,14 +58,14 @@ struct PostView: View {
         VStack(alignment: .leading) {
             
             HStack {
-                Image("man_profile")
+                Image(post.person!.profile_pic!)
                     .resizable()
                     .clipShape(Circle())
                     .shadow(radius: 10)
                     .frame(width: 30, height: 30, alignment: .leading)
                 
                 // Username
-                Text("\(post.firstName!)")
+                Text("\(post.person!.firstName!)")
                     .font(.system(size: 18))
                 
                 Spacer()
@@ -83,43 +83,59 @@ struct PostView: View {
             
             Image("\(post.picture!)").resizable().scaledToFit()
             
-            
-            HStack {
-                UpvoteView()
-                Spacer()
-                DoneItView()
-                Spacer()
-                ShareView()
-                Spacer()
-                AwardView()
-                
-                NavigationLink(destination: DetailView(post: post)) {Text("")}.buttonStyle(PlainButtonStyle()).opacity(0).frame(width: 0)
-                //        .navigationBarTitle("", displayMode: .inline) // custom back button
+            if (post.isPost) {
+                HStack {
+                    UpvoteView()
+                    Spacer()
+                    DoneItView()
+                    Spacer()
+                    ShareView()
+                    Spacer()
+                    AwardView()
+                    
+                    NavigationLink(destination: DetailView(post: post)) {Text("")}.buttonStyle(PlainButtonStyle()).opacity(0).frame(width: 0)
+                    //        .navigationBarTitle("", displayMode: .inline) // custom back button
+                }
+                .padding(10)
+                .foregroundColor(ColorManager.textGrey)
+                .font(.system(size: 15))
             }
-            .padding(10)
-            .foregroundColor(ColorManager.textGrey)
-            .font(.system(size: 15))
-            
+            else {
+                HStack {
+                    UpvoteView()
+                    Spacer()
+                    ShareView()
+                    Spacer()
+                    AwardView()
+                }
+                .padding(10)
+                .foregroundColor(ColorManager.textGrey)
+                .font(.system(size: 15))
+            }
             
         }
         .background(ColorManager.postGrey)
         .frame(maxWidth: .infinity)
             
-            // THIS IS HACKING BUT CANT FIND REASONABLE SOLUTION
-            .padding([.leading, .trailing], -20)
-            .padding([.top], -5)
+        // THIS IS HACKING BUT CANT FIND REASONABLE SOLUTION
+        .padding([.leading, .trailing], -20)
+        .padding([.top], -5)
     }
     
 }
 
 struct PostListView: View {
+    var posts: [Post]
     
-    init( whatViewShow: Binding<Int>) {
+    init( posts: [Post]) {
+        self.posts = posts
         // To remove only extra separators below the list:
         UITableView.appearance().tableFooterView = UIView()
         
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
+        
+        
     }
     
     
@@ -135,7 +151,7 @@ struct ContentView: View {
             VStack {
                 if whatViewShow == 0
                 {
-                    PostListView(whatViewShow: self.$whatViewShow)
+                    PostListView(posts: test_posts)
                         .animation(.spring())
                         .transition(.slide)
                 }

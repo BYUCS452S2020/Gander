@@ -15,8 +15,22 @@ struct ColorManager {
 }
 
 struct ImageManager {
-    static let beach_img = "beach_img"
-    static let camping_img = "camping_img"
-    static let kayaking_img = "kayaking_img"
+    
+    // Beach
+    static let beach_post = "beach_post"
+    static let beach_comment_a = "beach_comment_a"
+    static let beach_comment_b = "beach_comment_b"
+    static let beach_comment_c = "beach_comment_c"
+    
+    static let beach_man_post = "beach_man_post"
+    static let beach_man_comment_a = "beach_man_comment_a"
+    static let beach_man_comment_b = "beach_man_comment_b"
+    static let beach_man_comment_c = "beach_man_comment_c"
+    
+    // Camping
+    static let camping = "camping_post"
+    
+    // Kayaking
+    static let kayaking = "kayaking_post"
     
 }

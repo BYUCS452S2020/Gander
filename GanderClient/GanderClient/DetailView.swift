@@ -10,8 +10,12 @@ import SwiftUI
 
 struct DetailView: View {
     var post: Post
+    
     var body: some View {
-        Text(post.firstName!)
+        VStack {
+            PostListView(posts: [post] + post.comments)
+            Spacer()
+        }
     }
 }   
 

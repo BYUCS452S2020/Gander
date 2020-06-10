@@ -39,21 +39,15 @@ app.get('/post', (req, res) =>
       });
 });
 
-
-app.post('/save', (req, res) => {
-  var reqBody = req.body;
-  var personList = reqBody[0];
-  var postList = reqBody[1];
-  if(personList.length == 0 && postList.length == 0)
+app.post('/person', (req, res) => {
+  var personList = req.body;
+  if(personList.length == 0)
   {
     res.sendStatus(400);
   }
   con.query("DELETE FROM Post", function(err, result) {
     if (err) throw err;
    });
-  con.query("DELETE FROM Person", function(err, result) {
-    if (err) throw err;
-  });
   var i;
   for(i = 0; i < personList.length; i++)
   {
@@ -64,6 +58,21 @@ app.post('/save', (req, res) => {
       console.log("1 record inserted");
     });
   }
+  console.log(req.body);
+  res.sendStatus(200);
+});
+
+
+app.post('/post', (req, res) => {
+  var postList = req.body;
+  if(postList.length == 0)
+  {
+    res.sendStatus(400);
+  }
+  con.query("DELETE FROM Post", function(err, result) {
+    if (err) throw err;
+   });
+  var i;
   for(i = 0; i < postList.length; i++)
   {
     var entry = postList[i];

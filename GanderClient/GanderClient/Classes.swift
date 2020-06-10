@@ -30,6 +30,7 @@ class Post : Identifiable {
     var person: Person?
     var picture: String?
     var content: String?
+    var date: String?
     var comments: [Post] = []
     
     init(isPost: Bool, title: String, person: Person, picture: String?, content: String, comments: [Post]) {

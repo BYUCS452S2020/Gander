@@ -28,9 +28,11 @@ struct ImageManager {
     static let beach_man_comment_c = "beach_man_comment_c"
     
     // Camping
-    static let camping = "camping_post"
+    static let camping_post = "camping_post"
+    static let camping_man_post = "camping_man_post"
     
     // Kayaking
-    static let kayaking = "kayaking_post"
+    static let kayaking_post = "kayaking_post"
+    static let kayaking_man_post = "kayaking_man_post"
     
 }

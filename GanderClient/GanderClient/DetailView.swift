@@ -13,10 +13,39 @@ struct DetailView: View {
     
     var body: some View {
         VStack {
-            PostListView(posts: [post] + post.comments)
+            PostListView(posts: [post] + post.getComments())
             Spacer()
         }
     }
 }   
 
+struct ButtonView: View {
+    @Binding var whatViewShow: Int
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            Button(action: {deleteData()}) {
+                Text("Clear Database")}
+                     
+            Spacer()
+            
+            Button(action: {saveData()}) {
+                  Text("Save to Database")}
 
+            Spacer()
+
+            Button(action: {loadData()}) {
+                  Text("Load From Database")}
+            
+            Spacer()
+            
+            
+            Button(action: {self.whatViewShow = 0}) {
+                           Text("View App")}
+            
+            Spacer()
+        }
+    }
+}

@@ -9,7 +9,6 @@
 
 import SwiftUI
 
-
 struct UpvoteView: View {
     
     var body: some View {
@@ -58,14 +57,14 @@ struct PostView: View {
         VStack(alignment: .leading) {
             
             HStack {
-                Image(post.person!.profile_pic!)
+                Image(post.getPerson().profile_pic)
                     .resizable()
                     .clipShape(Circle())
                     .shadow(radius: 10)
                     .frame(width: 30, height: 30, alignment: .leading)
                 
                 // Username
-                Text("\(post.person!.firstName!)")
+                Text("\(post.getPerson().firstName)")
                     .font(.system(size: 18))
                 
                 Spacer()
@@ -77,11 +76,11 @@ struct PostView: View {
             .padding(EdgeInsets(top: 15, leading: 10, bottom: 0, trailing: 20))
             
             
-            Text("\(post.content!)").padding(10)
+            Text("\(post.content)").padding(10)
             
             
             
-            Image("\(post.picture!)").resizable().scaledToFit()
+            Image("\(post.picture)").resizable().scaledToFit()
             
             if (post.isPost) {
                 HStack {
@@ -134,8 +133,6 @@ struct PostListView: View {
         
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
-        
-        
     }
     
     
@@ -145,16 +142,20 @@ struct PostListView: View {
 }
 
 struct ContentView: View {
-    @State var whatViewShow: Int = 0
+    @State var whatViewShow: Int = 1
     var body: some View {
         NavigationView {
             VStack {
                 if whatViewShow == 0
                 {
-                    PostListView(posts: test_posts)
+                    PostListView(posts: realCoolPosts)
                         .animation(.spring())
                         .transition(.slide)
                 }
+                if whatViewShow == 1
+                          {
+                              ButtonView(whatViewShow: self.$whatViewShow)
+                          }
             }
             .navigationBarTitle(Text("Gander"), displayMode: .inline)
             
